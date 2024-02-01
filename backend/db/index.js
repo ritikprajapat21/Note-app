@@ -4,7 +4,7 @@ import NoteModel from "./schema.js";
 
 export default async function connect() {
   console.log("Connecting to database");
-  const conn = await mongoose.connect("mongodb://172.18.0.2:27017/mongodb", {
+  const conn = await mongoose.connect("mongodb://0.0.0.0:27017/mongodb", {
     authSource: "admin",
     user: "root",
     pass: "password",

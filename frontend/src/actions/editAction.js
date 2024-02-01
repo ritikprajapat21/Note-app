@@ -1,11 +1,14 @@
 import { redirect } from "react-router-dom";
-
-const editNote = async (id) => setTimeout(() => console.log(id), 1000);
+import axios from "axios";
 
 export default async function editAction({ request, params }) {
+  const { id } = params;
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
-  await editNote(params.id);
-  return redirect(`${params.id}`);
+  const result = await axios.put(`http://localhost:3001/${id}`, {
+    title: data.title,
+    content: data.content,
+  });
+  console.log(result);
+  return redirect(`/${params.id}`);
 }

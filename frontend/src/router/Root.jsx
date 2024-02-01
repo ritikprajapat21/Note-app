@@ -1,33 +1,50 @@
-import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
+import { Form, Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 
 export default function Root() {
+  const notes = useLoaderData();
+
   return (
     <>
       {/* For search form and create button */}
-      <div id="sidebar">
-        <h1>Notes App</h1>
-        <div>
-          <form>
-            <input type="search" placeholder="Search" name="q" />
-          </form>
-          <form>
-            <button type="submit">New</button>
-          </form>
+      <Suspense fallback={<Fallback />}>
+        <div id="sidebar">
+          <h1>Notes App</h1>
+          <div>
+            <Form>
+              <input type="search" placeholder="Search" name="q" />
+            </Form>
+            <Form method="post" action="create">
+              <Link to="create">New</Link>
+            </Form>
+          </div>
+          <nav>
+            {notes.length > 0 ? (
+              <ul>
+                {notes.map((note) => {
+                  return (
+                    <li key={note._id}>
+                      <NavLink to={note._id}>{note.title}</NavLink>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <>
+                <p>No note available.</p>
+                <p>Create a note</p>
+              </>
+            )}
+          </nav>
         </div>
-        <nav>
-          <ul>
-            <li>
-              <a>Note1</a>
-            </li>
-            <li>
-              <a>Note2</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div id="children">
-        <Outlet />
-      </div>
+        <div id="children">
+          <Outlet />
+        </div>
+      </Suspense>
     </>
   );
+}
+
+function Fallback() {
+  return <p>Content is loading...</p>;
 }

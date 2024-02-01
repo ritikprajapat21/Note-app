@@ -1,8 +1,11 @@
 import { Form, useLoaderData } from "react-router-dom";
 
 export default function Edit() {
-  const note = useLoaderData();
-  console.log(note);
+  const { status, note } = useLoaderData();
+
+  if (status === 204) {
+    return <p>Note does not exist</p>;
+  }
 
   return (
     <Form method="post">
@@ -24,7 +27,7 @@ export default function Edit() {
           defaultValue={note.content}
         />
       </label>
-      <button type="submit">Create</button>
+      <button type="submit">Edit</button>
     </Form>
   );
 }

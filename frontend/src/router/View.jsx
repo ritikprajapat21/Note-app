@@ -1,7 +1,11 @@
 import { Form, useLoaderData } from "react-router-dom";
 
 export default function View() {
-  const note = useLoaderData();
+  const { status, note } = useLoaderData();
+
+  if (status === 204) {
+    return <p>Note does not exist</p>;
+  }
 
   return (
     <>
@@ -12,7 +16,15 @@ export default function View() {
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>
-          <Form action="delete">
+          <Form
+            action="delete"
+            method="post"
+            onSubmit={(e) => {
+              if (!confirm("Want to delete this note")) {
+                e.preventDefault();
+              }
+            }}
+          >
             <button type="submit">Delete</button>
           </Form>
         </div>
