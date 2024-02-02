@@ -10,6 +10,7 @@ import loadNote from "./loader/loadNote";
 import loadNotes from "./loader/loadNotes";
 import Edit from "./router/Edit";
 import View from "./router/View";
+import Index from "./router/Index";
 import editAction from "./actions/editAction";
 import deleteAction from "./router/delete";
 
@@ -21,20 +22,26 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/create",
-        action: createAction,
-        element: <Create />,
-      },
-      { path: "/:id", loader: loadNote, element: <View /> },
-      {
-        path: "/:id/edit",
-        loader: loadNote,
-        action: editAction,
-        element: <Edit />,
-      },
-      {
-        path: "/:id/delete",
-        action: deleteAction,
+        errorElement: <ErrorPage />,
+        children: [
+          { index: true, element: <Index /> },
+          {
+            path: "/create",
+            action: createAction,
+            element: <Create />,
+          },
+          { path: "/:id", loader: loadNote, element: <View /> },
+          {
+            path: "/:id/edit",
+            loader: loadNote,
+            action: editAction,
+            element: <Edit />,
+          },
+          {
+            path: "/:id/delete",
+            action: deleteAction,
+          },
+        ],
       },
     ],
   },

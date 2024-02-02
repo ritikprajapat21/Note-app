@@ -1,8 +1,20 @@
-import { Suspense } from "react";
-import { Form, Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import {
+  Form,
+  Link,
+  NavLink,
+  Outlet,
+  useLoaderData,
+  useSubmit,
+} from "react-router-dom";
 
 export default function Root() {
-  const notes = useLoaderData();
+  const { notes, q } = useLoaderData();
+  const submit = useSubmit();
+
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  }, [q]);
 
   return (
     <>
@@ -12,7 +24,14 @@ export default function Root() {
           <h1>Notes App</h1>
           <div>
             <Form role="search">
-              <input type="search" placeholder="Search" name="q" />
+              <input
+                type="search"
+                placeholder="Search"
+                id="q"
+                name="q"
+                defaultValue={q}
+                onChange={(e) => submit(e.currentTarget.form)}
+              />
             </Form>
             <Form method="post" action="create">
               <Link to="create">New</Link>
