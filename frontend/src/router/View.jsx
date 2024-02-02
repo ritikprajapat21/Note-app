@@ -1,4 +1,5 @@
 import { Form, useLoaderData } from "react-router-dom";
+import "../styles/view.css";
 
 export default function View() {
   const { status, note } = useLoaderData();
@@ -9,7 +10,7 @@ export default function View() {
 
   return (
     <>
-      <div>
+      <div className="view">
         <h1>{note.title}</h1>
         <p>{note.content || "No content added"}</p>
         <div>

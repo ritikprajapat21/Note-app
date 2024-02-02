@@ -14,9 +14,14 @@ app.use(cors());
 
 // To get all notes
 app.get("/", async (req, res) => {
+  console.log(req.query.q);
   try {
-    const notes = await Note.find();
+    const notes = req.query.q
+      ? await Note.find({ title: /req.query.q/ }).exec()
+      : /* Note.aggregate([{$match: {title: }}]) */
+        await Note.find().exec();
 
+    console.log(notes);
     if (notes.length === 0) {
       return res.sendStatus(204);
     }

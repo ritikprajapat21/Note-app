@@ -1,0 +1,51 @@
+.create-form {
+  height: 100%;
+  width: 100%;
+}
+
+.create-form label {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  align-items: center;
+}
+
+.create-form label input,
+.create-form label textarea {
+  padding: 0.6rem;
+  background-color: white;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  box-shadow: 3px 3px 5px;
+  color: #7575cb;
+}
+
+.create-form label textarea {
+  height: 5rem;
+  width: 20rem;
+}
+
+.create-form label textarea::placeholder {
+  text-align: center;
+}
+
+.create-form button {
+  border: 1px solid whitesmoke;
+  padding: 0.5rem;
+  background-color: white;
+  box-shadow: 1px 2px 3px;
+  color: #6464b7;
+  border-radius: 0.5rem;
+  outline: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.create-form button:hover,
+.create-form button:focus-visible,
+.create-form button:focus-within {
+  box-shadow: 3px 3px 6px;
+  background-color: #dde9e9;
+  color: #44448b;
+}

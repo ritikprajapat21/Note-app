@@ -1,4 +1,5 @@
 import { Form, useLoaderData } from "react-router-dom";
+import "../styles/create.css";
 
 export default function Edit() {
   const { status, note } = useLoaderData();
@@ -8,7 +9,7 @@ export default function Edit() {
   }
 
   return (
-    <Form method="post">
+    <Form method="post" className="create-form">
       <label>
         <span>Note Title</span>
         <input

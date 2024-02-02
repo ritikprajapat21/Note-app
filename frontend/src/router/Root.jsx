@@ -11,7 +11,7 @@ export default function Root() {
         <div id="sidebar">
           <h1>Notes App</h1>
           <div>
-            <Form>
+            <Form role="search">
               <input type="search" placeholder="Search" name="q" />
             </Form>
             <Form method="post" action="create">
@@ -31,8 +31,7 @@ export default function Root() {
               </ul>
             ) : (
               <>
-                <p>No note available.</p>
-                <p>Create a note</p>
+                <Link to="/create">No note available. Create a note</Link>
               </>
             )}
           </nav>
