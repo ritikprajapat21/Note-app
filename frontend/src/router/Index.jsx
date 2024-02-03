@@ -1,3 +1,3 @@
 export default function Index() {
-  return <p>This is index</p>;
+  return <p>Select a note to view</p>;
 }
